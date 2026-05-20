@@ -22,6 +22,85 @@
   <body>
     <div id="root"></div>
   </body>
+  <script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+  getFirestore,
+  collection,
+  getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCATGNAyhBFAwx_zuocr99yq3guKCLDZGs",
+  authDomain: "almanshuriyahcibadak-df616.firebaseapp.com",
+  projectId: "almanshuriyahcibadak-df616",
+  appId: "1:683338470732:web:4a2072c4b9aa5f444eabe9",
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+async function loadPosts(){
+
+  const container =
+  document.getElementById("posts");
+
+  container.innerHTML = "";
+
+  const querySnapshot =
+  await getDocs(collection(db, "posts"));
+
+  querySnapshot.forEach((doc)=>{
+
+    const post = doc.data();
+
+    container.innerHTML += `
+
+      <div style="
+        background:white;
+        padding:20px;
+        margin:20px 0;
+        border-radius:10px;
+      ">
+
+        <h2>${post.title}</h2>
+
+        <p>${post.content}</p>
+
+        ${
+          post.imageUrl
+          ?
+          `<img 
+            src="${post.imageUrl}"
+            width="250"
+            style="border-radius:10px;margin-top:10px;"
+          >`
+          :
+          ""
+        }
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+loadPosts();
+
+</script>
 </html>
 <div id="posts"></div>
 
