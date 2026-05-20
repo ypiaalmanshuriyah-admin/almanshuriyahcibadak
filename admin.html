@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+</head>
+<body>
+
+<h2>Login Admin</h2>
+
+<input type="email" id="email" placeholder="Email">
+<br><br>
+
+<input type="password" id="password" placeholder="Password">
+<br><br>
+
+<button onclick="login()">Login</button>
+
+<!-- Firebase SDK -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { 
+  getAuth, 
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCATGNAyhBFAwx_zuocr99yq3guKCLDZGs",
+  authDomain: "almanshuriyahcibadak-df616.firebaseapp.com",
+  projectId: "almanshuriyahcibadak-df616",
+  appId: "1:683338470732:web:4a2072c4b9aa5f444eabe9",
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+window.login = function () {
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+
+    .then((userCredential) => {
+
+      alert("Login berhasil");
+
+      window.location.href = "dashboard.html";
+
+    })
+
+    .catch((error) => {
+
+      alert(error.message);
+
+    });
+};
+
+</script>
+
+</body>
+</html>

@@ -23,3 +23,23 @@
     <div id="root"></div>
   </body>
 </html>
+<div id="posts"></div>
+
+<html
+const result = document.getElementById("posts");
+
+querySnapshot.forEach((doc) => {
+
+    const post = doc.data();
+
+  result.innerHTML += `
+
+    <h2>${post.title}</h2>
+
+    <p>${post.content}</p>
+
+    <hr>
+
+});
+
+};
